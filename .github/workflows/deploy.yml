@@ -40,10 +40,11 @@ jobs:
         uses: actions/configure-pages@v3
         
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          # Upload the dist directory or wherever the built files are located
-          path: './dist'
+          # Specify the correct path to upload your artifact
+          name: build-artifact
+          path: ./dist
 
   # Deployment job
   deploy:
