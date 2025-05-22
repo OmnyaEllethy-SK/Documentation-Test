@@ -16,11 +16,38 @@ jobs:
         with:
           node-version: '18'
           
+      - name: Debug - List repository contents
+        run: |
+          echo "Root directory contents:"
+          ls -la
+          echo "Looking for package.json files:"
+          find . -name "package.json" -type f
+          
       - name: Install dependencies
-        run: npm install
-        
+        run: |
+          if [ -f "package.json" ]; then
+            npm install
+          elif [ -f "docs/package.json" ]; then
+            cd docs && npm install
+          elif [ -f "website/package.json" ]; then
+            cd website && npm install
+          else
+            echo "No package.json found in expected locations"
+            exit 1
+          fi
+          
       - name: Build OpenDocs
-        run: npm run build
+        run: |
+          if [ -f "package.json" ]; then
+            npm run build
+          elif [ -f "docs/package.json" ]; then
+            cd docs && npm run build
+          elif [ -f "website/package.json" ]; then
+            cd website && npm run build
+          else
+            echo "No build script found"
+            exit 1
+          fi
         
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
