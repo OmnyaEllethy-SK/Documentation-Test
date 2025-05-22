@@ -1,26 +1,33 @@
-name: autofix.ci  # needed to securely identify the workflow
+name: Deploy Docs
 
 on:
-  pull_request:
   push:
-    branches: [ "main" ]
-
-permissions:
-  contents: read
+    branches:
+      - main  # or your default branch
 
 jobs:
-  autofix:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm i -g --force corepack && corepack enable
-      - uses: actions/setup-node@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: "pnpm"
-      - run: pnpm install
-      - name: Fix lint issues
-        run: pnpm run lint:fix
-      - uses: autofix-ci/action@551dded8c6cc8a1054039c8bc0b8b48c51dfc6ef
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          cd docs
+          npm install
+
+      - name: Build
+        run: |
+          cd docs
+          npm run build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          commit-message: 'style: apply lint fixes'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/dist
