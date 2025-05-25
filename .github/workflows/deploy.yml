@@ -23,14 +23,19 @@ jobs:
           echo "Looking for package.json files:"
           find . -name "package.json" -type f
           
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9.6.0
+          
       - name: Install dependencies
         run: |
           if [ -f "package.json" ]; then
-            npm install
+            pnpm install
           elif [ -f "docs/package.json" ]; then
-            cd docs && npm install
+            cd docs && pnpm install
           elif [ -f "website/package.json" ]; then
-            cd website && npm install
+            cd website && pnpm install
           else
             echo "No package.json found in expected locations"
             exit 1
@@ -39,11 +44,11 @@ jobs:
       - name: Build OpenDocs
         run: |
           if [ -f "package.json" ]; then
-            npm run build
+            pnpm run build
           elif [ -f "docs/package.json" ]; then
-            cd docs && npm run build
+            cd docs && pnpm run build
           elif [ -f "website/package.json" ]; then
-            cd website && npm run build
+            cd website && pnpm run build
           else
             echo "No build script found"
             exit 1
