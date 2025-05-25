@@ -63,7 +63,7 @@ jobs:
       - name: Update pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .next/
+          path: docs/apps/web
 
   deploy:
     needs: build
