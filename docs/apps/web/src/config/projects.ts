@@ -1,6 +1,6 @@
-import type { DocsConfig } from '@/lib/opendocs/types/Projects'
+import type { ProjectsConfig } from '@/lib/opendocs/types/Projects'
 
-export const docsConfig: DocsConfig = {
+export const projectsConfig: ProjectsConfig = {
   mainNav: [
     {
       href: '/projects',
@@ -25,7 +25,7 @@ export const docsConfig: DocsConfig = {
             pt: 'Projeto A',
           },
           items: [
-            {
+         /*   {
               href: '/projects/project-A/overview',
               title: {
                 en: 'Overview',
@@ -38,7 +38,7 @@ export const docsConfig: DocsConfig = {
                 en: 'Environments',
                 pt: 'ambiente',
               },
-            },
+            },*/
           ],
         },
         {
