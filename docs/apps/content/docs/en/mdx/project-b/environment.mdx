@@ -1,0 +1,50 @@
+---
+title: Project X - Environments
+description: Environment configurations, credentials, and important notes
+---
+
+# 🌍 Project X - Environments
+
+This page documents the different environments used across the lifecycle of Project X.
+
+## 🔵 Development
+
+- **URL**: `https://dev.projectx.internal`
+- **Branch**: `develop`
+- **Database**: Shared dev instance
+- **Secrets**: Stored in `.env.dev`, managed manually
+- **Deploy**: Manual, via SSH or local GitHub Action trigger
+- **Notes**: Used for daily development and feature testing.
+
+## 🟡 Staging
+
+- **URL**: `https://staging.projectx.com`
+- **Branch**: `release/staging`
+- **Database**: Isolated from dev, seeded weekly
+- **Secrets**: GitHub Secrets (repo-level)
+- **Deploy**: Auto-deploy from GitHub Actions on push to `release/staging`
+- **Purpose**: Final testing and UAT.
+
+## 🟢 Production
+
+- **URL**: `https://app.projectx.com`
+- **Branch**: `main`
+- **Database**: Production RDS (backup enabled)
+- **Secrets**: GitHub Organization Secrets + AWS Secrets Manager
+- **Deploy**: Auto-deploy on push to `main`, with manual approval
+- **Monitoring**: UptimeRobot + AWS CloudWatch
+
+## 🔐 Environment-Specific Secrets
+
+| Key              | Environment | Managed By         |
+|------------------|-------------|--------------------|
+| `STRIPE_API_KEY` | All         | GitHub Secrets     |
+| `DB_PASSWORD`    | Prod        | AWS Secrets Manager|
+| `JWT_SECRET`     | Dev/Staging | GitHub Secrets     |
+
+## 📝 Notes
+
+- Never use production credentials in dev or staging.
+- Coordinate staging database refreshes through the DevOps team.
+- Add any new secrets via a pull request or secure channel to DevOps.
+

@@ -41,26 +41,66 @@ export const docsConfig: DocsConfig = {
         },
 
         {
-          href: '/docs/adding-new-docs',
+          href: '/docs/project-a',
 
           title: {
-            en: 'Adding new docs',
+            en: 'Project A',
             pt: 'Adicionando novos documentos',
           },
 
           items: [],
         },
+{
+          title: {
+            en: 'Project B',
+          },
+
+          items: [
+            {
+              href: '/docs/project-b/overview',
+
+              title: {
+                en: 'Overview',
+                pt: 'Cabeçalho de metadados',
+              },
+
+              items: [],
+            },
+
+            {
+              href: '/docs/project-b/enviroment',
+
+              title: {
+                en: 'Environment',
+                pt: 'Código',
+              },
+              items: [],
+            }
+          ] // ✅ Closing Project B items array here
+        },
+                   
 
         {
-          href: '/docs/customizing',
+          href: '/docs/sk-devops',
 
           title: {
-            en: 'Customizing',
+            en: 'SK Devops',
             pt: 'Personalizando',
           },
 
           items: [],
         },
+       {
+          href: '/docs/Test',
+
+          title: {
+            en: 'Test',
+            pt: 'Personalizando',
+          },
+
+          items: [],
+        },
+        
 
         {
           title: {
@@ -132,8 +172,10 @@ export const docsConfig: DocsConfig = {
           },
 
           items: [],
+          
         },
       ],
     },
   ],
+  
 } as const

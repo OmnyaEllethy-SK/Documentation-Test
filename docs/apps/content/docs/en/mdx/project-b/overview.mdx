@@ -1,0 +1,46 @@
+---
+title: Project X - Overview
+description: High-level architecture, services, and ownership info for Project X
+---
+
+# 🧭 Project X - Overview
+
+**Purpose**: Project X is a payment platform for managing user transactions and wallet services.
+
+## 🧱 Architecture
+
+- **Frontend**: React SPA hosted on Vercel
+- **Backend**: Node.js (Express) hosted on AWS EC2
+- **Database**: PostgreSQL (AWS RDS)
+- **CI/CD**: GitHub Actions + S3 + CodeDeploy
+- **Infrastructure as Code**: Terraform
+
+## 🌐 Domains
+
+| Environment | URL |
+|-------------|-----|
+| Production  | `https://app.projectx.com` |
+| Staging     | `https://staging.projectx.com` |
+| Dev         | `https://dev.projectx.internal` |
+
+## 📦 Services
+
+- **API Gateway**: AWS API Gateway
+- **Auth**: Firebase Authentication
+- **Payments**: Stripe Integration
+- **Monitoring**: UptimeRobot + CloudWatch
+
+## 👥 Ownership
+
+| Area           | Owner          |
+|----------------|----------------|
+| Frontend       | Frontend Team  |
+| Backend        | Backend Team   |
+| DevOps/Infra   | DevOps Team    |
+| Project Manager| Sarah M.       |
+
+## 🛠 Related Docs
+
+- [Deployment Instructions](./deployment)
+- [Environments & Secrets](./environments)
+- [Troubleshooting](./troubleshooting)

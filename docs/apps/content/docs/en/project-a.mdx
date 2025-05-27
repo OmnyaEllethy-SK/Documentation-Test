@@ -1,0 +1,90 @@
+---
+title: Project A 
+description: High-level overview and environment configurations for Project X
+---
+
+# 🧭 Project A - Overview
+
+**Purpose**: Project A is a secure digital wallet platform for managing user transactions and integrations with third-party payment providers.
+
+## 🧱 Architecture
+
+- **Frontend**: React (Vite) hosted on Vercel
+- **Backend**: Node.js (Express) hosted on AWS EC2
+- **Database**: PostgreSQL (AWS RDS)
+- **CI/CD**: GitHub Actions → S3 + CodeDeploy
+- **Infrastructure as Code**: Terraform
+
+## 🌐 Domains
+
+| Environment | URL                        |
+|-------------|----------------------------|
+| Production  | `https://app.projectx.com` |
+| Staging     | `https://staging.projectx.com` |
+| Development | `https://dev.projectx.internal` |
+
+## 📦 Services
+
+- **API Gateway**: AWS API Gateway
+- **Authentication**: Firebase Auth
+- **Payments**: Stripe
+- **Monitoring**: UptimeRobot + AWS CloudWatch
+- **Error Tracking**: Sentry
+
+## 👥 Ownership
+
+| Component        | Owner        |
+|------------------|--------------|
+| Frontend         | Frontend Team |
+| Backend          | Backend Team  |
+| Infrastructure   | DevOps Team   |
+| Project Manager  | Sarah M.      |
+
+---
+
+# 🌍 Environments
+
+This section describes each environment used in the lifecycle of Project X.
+
+## 🔵 Development
+
+- **URL**: `https://dev.projectx.internal`
+- **Branch**: `develop`
+- **DB**: Shared instance (daily reset)
+- **Secrets**: `.env.dev`, managed locally
+- **Deployment**: Manual via GitHub Action or SSH
+- **Purpose**: Active development, testing features
+
+## 🟡 Staging
+
+- **URL**: `https://staging.projectx.com`
+- **Branch**: `release/staging`
+- **DB**: Isolated from dev, refreshed weekly
+- **Secrets**: GitHub repo secrets
+- **Deployment**: Auto-trigger on push to `release/staging`
+- **Purpose**: QA testing and UAT
+
+## 🟢 Production
+
+- **URL**: `https://app.projectx.com`
+- **Branch**: `main`
+- **DB**: AWS RDS (prod tier, backup enabled)
+- **Secrets**: GitHub org secrets + AWS Secrets Manager
+- **Deployment**: Auto-triggered on merge to `main` with manual approval step
+- **Monitoring**: AWS CloudWatch + StatusPage
+
+## 🔐 Key Secrets Management
+
+| Secret Name        | Env(s)        | Storage Method         |
+|--------------------|---------------|-------------------------|
+| `STRIPE_API_KEY`   | All           | GitHub Secrets          |
+| `DB_PASSWORD`      | Prod          | AWS Secrets Manager     |
+| `JWT_SECRET`       | Dev, Staging  | GitHub Repo Secrets     |
+
+## 📝 Notes & Warnings
+
+- **Do not use production secrets** in development or staging environments.
+- Any deployment to production must follow the [deployment checklist](./deployment-checklist).
+- Coordinate DB resets or syncs with the DevOps team at least 24h in advance.
+- Make sure `.env` templates are updated when new secrets are introduced.
+
