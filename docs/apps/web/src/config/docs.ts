@@ -68,7 +68,7 @@ export const docsConfig: DocsConfig = {
             },
 
             {
-              href: '/docs/project-b/enviroment',
+              href: '/docs/project-b/environments',
 
               title: {
                 en: 'Environment',

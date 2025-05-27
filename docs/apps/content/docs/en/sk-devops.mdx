@@ -1,43 +1,100 @@
 ---
-title: Customizing
-description: How to customize your documentation site.
+title: DevOps Team - Core Activities
+description: An overview of the DevOps team's main responsibilities, activities, and recurring tasks across all projects.
 ---
 
-To customize your documentation site, you can check the files and folders below:
+# ⚙️ DevOps Team - Core Activities
 
-- **`src/config`**: Contains the site configuration files, such as:
-  - site information settings
-  - code theme
-  - navigation menu
-  - internationalization.
+This document outlines the standard set of responsibilities handled by the DevOps team across all company projects.
 
-- **`src/i18n/locales/[language].json`**: Contains the text strings for each supported language that are not directly related to MDX contents (site, buttons, cards...).
-
-- **`src/components`**: Contains the site components.
-
-## MDX Document Settings
-
-MDX documents are stored in the `apps/content/docs/[language]` and `apps/content/blog/[language]` folder. Each document is an MDX file that contains a header with metadata, such as title and description. Below is an example of a document header:
-
-```mdx
 ---
-title: Document Title
-description: Document Description.
+
+## 🛠️ 1. Infrastructure Management
+
+- Provision and maintain servers (AWS, DigitalOcean, etc.)
+- Manage networking, load balancers, and DNS records
+- Apply security patches and OS updates
+- Maintain Infrastructure-as-Code (e.g., Terraform, Pulumi)
+
+## 🚀 2. CI/CD Pipelines
+
+- Design and maintain CI/CD workflows using GitHub Actions
+- Enforce build/test pipelines before deployment
+- Configure environments and secrets for each pipeline
+- Handle rollback strategies and post-deploy testing
+
+## 📦 3. Deployments
+
+- Perform manual or automated deployments to staging and production
+- Manage Docker containers, orchestration (e.g., Docker Compose, ECS, etc.)
+- Coordinate deployment schedules with PMs and developers
+- Validate deployment success (health checks, smoke tests)
+
+## 📁 4. Environment & Secret Management
+
+- Manage `.env` templates and shared secrets
+- Use GitHub Secrets, AWS Secrets Manager, or Vault
+- Document secure access procedures
+- Audit and rotate credentials periodically
+
+## 🧪 5. Monitoring & Alerts
+
+- Set up uptime and performance monitoring (e.g., UptimeRobot, CloudWatch)
+- Configure alerting channels (Slack, email, etc.)
+- Monitor disk space, memory usage, CPU loads
+- Respond to downtime and degradation events
+
+## 🔐 6. Access Control
+
+- Manage SSH access to servers
+- Onboard/offboard team members securely
+- Maintain audit logs of access and changes
+- Use bastion hosts or VPNs where required
+
+## 📄 7. Documentation & Playbooks
+
+- Maintain infrastructure documentation per project
+- Document deployment procedures and troubleshooting steps
+- Create and update onboarding materials
+- Write SOPs for recurring tasks
+
+## 🧹 8. Backup & Recovery
+
+- Configure automated backups for production databases
+- Test recovery processes quarterly
+- Document backup retention policies
+- Encrypt and store backups securely
+
+## 🛡️ 9. Security & Compliance
+
+- Ensure all servers are hardened
+- Regularly scan for vulnerabilities
+- Enforce HTTPS, firewall rules, and access controls
+- Work with security teams to comply with internal policies
+
+## 🔁 10. Coordination with Other Teams
+
+- Join planning sessions for infrastructure-heavy projects
+- Review new feature rollouts for impact on infra
+- Support QA in staging/UAT stability
+- Work with PMs to schedule non-disruptive releases
+
 ---
-```
 
-To add new metadata to the document, you can add new keys to the header. For example, you can add an `author` key to indicate the document author:
+## ✅ Recurring Weekly Tasks
 
-```mdx
+| Task                             | Frequency | Owner |
+|----------------------------------|-----------|--------|
+| Review open DevOps GitHub issues | Weekly    | Team Lead |
+| Check server health/disk space   | Weekly    | Any    |
+| Secrets rotation review          | Monthly   | Lead   |
+| CI/CD pipeline audit             | Bi-weekly | Team   |
+
 ---
-title: Document Title
-description: Document Description.
-author: Author Name
----
-```
 
-But when adding custom metadata, you also need to update the `contentlayer.config.ts` file located at the root of the project and inside the `fields` property in the `Doc` or `Blog` constants.
-After that, you will need to display the new information in the document template. To do this, you will need to update the `src/app/[locale]/docs/[[...slug]]/page.tsx` file, or `src/app/[locale]/blog/[[...slug]]/page.tsx` or one of its child components.
+## 📌 Notes
 
-
+- Always work from GitHub Issues or PM requests — no untracked work.
+- All deployments **must be documented** in project deployment logs.
+- In case of major incidents, follow the [Incident Response SOP](./incident-response).
 
